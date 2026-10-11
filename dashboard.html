@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+</head>
+
+<body>
+  
+</body>
+
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NXC CITADEL CENTRAL CORE</title>
+    <style>
+        body { background-color: #03060f; color: #f1f5f9; font-family: 'Courier New', monospace; padding: 15px; text-align: center; margin: 0; }
+        .citadel-card { border: 1px solid #111a2e; background-color: #070b16; padding: 25px; max-width: 480px; margin: 20px auto; text-align: left; box-shadow: 0 10px 30px rgba(0,0,0,0.7); }
+        .matrix-gold { color: #d4af37; font-weight: bold; }
+        .balance-readout { font-size: 2.4rem; font-weight: bold; color: #f1f5f9; text-align: center; margin: 10px 0; letter-spacing: 1px; }
+        .btn-circle-claim { width: 140px; height: 140px; border-radius: 50%; background-color: #7c3aed; color: #ffffff; border: 2px solid #a78bfa; font-weight: bold; cursor: pointer; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 0 20px rgba(124, 58, 237, 0.5); display: flex; justify-content: center; align-items: center; text-align: center; font-family: 'Courier New', monospace; transition: all 0.2s ease; }
+        .btn-circle-claim:hover { background-color: #6d28d9; transform: scale(1.03); box-shadow: 0 0 25px rgba(124, 58, 237, 0.7); }
+        .btn-action { background-color: #d4af37; color: #000000; padding: 14px; border: none; font-weight: bold; cursor: pointer; font-size: 0.95rem; width: 100%; margin-top: 15px; text-transform: uppercase; letter-spacing: 1px; text-align: center; display: block; text-decoration: none; box-sizing: border-box; }
+        .btn-action:hover { background-color: #b89224; }
+        .tier-grid { display: grid; grid-template-columns: 1fr; gap: 8px; margin: 20px 0; }
+        .tier-row { border: 1px solid #111a2e; background-color: #03060f; padding: 12px; position: relative; cursor: pointer; }
+        .tier-row:hover { border-color: #d4af37; }
+        .tier-title { font-weight: bold; color: #3b82f6; font-size: 0.9rem; }
+        .tier-meta { font-size: 0.75rem; color: #94a3b8; margin-top: 2px; }
+        .tier-price { position: absolute; right: 12px; top: 12px; font-weight: bold; color: #10b981; font-size: 0.85rem; }
+        .checkout-box { display: block; background-color: #020617; border: 1px dashed #d4af37; padding: 15px; margin-top: 15px; font-size: 0.85rem; }
+        .monospace-address-block { background-color: #03060f; border: 1px solid #111a2e; padding: 12px; color: #d4af37; font-family: monospace; font-size: 0.75rem; font-weight: bold; text-align: center; word-break: break-all; cursor: pointer; margin: 10px 0; }
+        .input-field { width: 94%; padding: 10px; margin-top: 8px; border: 1px solid #111a2e; background-color: #03060f; color: #10b981; font-family: monospace; text-align: center; display: block; margin-left: auto; margin-right: auto; }
+    </style>
+    <!-- Official Supabase Client SDK Framework Node Connector -->
+    <script src="https://jsdelivr.net"></script>
+</head>
+<body>
+
+    <div class="citadel-card">
+        <h3 style="margin-top: 0; text-align: center; letter-spacing: 1px;">🪐 NEXA IMPERIAL PORTAL</h3>
+        
+        <!-- MONOCHROME HIGH-PRESTIGE SYSTEM MONITOR PANEL -->
+        <div style="border: 1px solid #111a2e; padding: 12px; background-color: #03060f; font-size: 0.8rem; line-height: 1.5;">
+            <div>👤 OPERATOR NODE ID: <span class="matrix-gold" id="profile-username-display">FETCHING STATUS...</span></div>
+            <div>⚡ HARDWARE ACCESS SPEED: <span style="color: #3b82f6; font-weight: bold;" id="current-tier-display">TIER 1 (0.01 ⌆ NXC / DAY)</span></div>
+        </div>
+
+        <!-- MINTED TOKEN RECURSIVE QUANTUM READOUT -->
+        <div style="text-align: center; margin-top: 20px;">
+            <span style="font-size: 0.75rem; color: #94a3b8; text-transform: uppercase;">YOUR SECURED BALANCE</span>
+            <div class="balance-readout" id="user-nox-balance">⌆0.000000</div>
+            <span style="font-size: 0.7rem; color: #94a3b8;">[ FIXED LAUNCH PRICE INDICES: $2.00 USD / NXC ]</span>
+        </div>
+
+        <!-- POOL A RESERVES COUNTER ESCRW -->
+        <div style="background-color: #022c22; border: 1px solid #065f46; padding: 15px; text-align: center; margin: 15px 0;">
+            <span style="font-size: 0.75rem; color: #a7f3d0; text-transform: uppercase;">POOL A: UNMINED ALLOCATION FLOAT</span>
+            <div style="font-size: 1.5rem; font-weight: bold; color: #10b981; margin-top: 4px;" id="public-pool-counter">⌆5,000,000.000000</div>
+        </div>
+
+        <p style="font-size: 0.72rem; color: #ef4444; text-align: center; margin: 0; text-transform: uppercase; font-weight: bold; letter-spacing: 0.5px;">⏰ EXTRACTION WINDOW: 17:00 - 17:59 UTC DAILY // DOOMSDAY MELT AT 18:00 UTC</p>
+
+        <!-- THE PERFECT PURPLE MINTING TRIGGER -->
+        <div style="display: flex; justify-content: center; align-items: center; margin: 25px 0;">
+            <button class="btn-circle-claim" onclick="executeNxcDailyClaimSequence()">⚡<br>DAILY<br>CLAIM</button>
+        </div>
+
+        <!-- DYNAMIC LEASE HARDWARE RIG SELECTION GRID -->
+        <h4 style="margin-top: 20px; border-bottom: 1px solid #111a2e; padding-bottom: 4px; font-size: 0.85rem;">💎 DYNAMIC RIG TIER SELECTION <span style="display:block; font-size:0.75rem; margin-top:4px; color:#94a3b8;">[ 30 - Days hardware lease allocation ]</span></h4>
+        <div class="tier-grid">
+            <div class="tier-row" onclick="focusTierGateway('Tier 2: ACCESS', '0.5 USDT')">
+                <div class="tier-title">TIER 2: ACCESS</div>
+                <div class="tier-meta">Daily Extraction Vector: ⌆0.10 NXC / Day</div><div class="tier-price">0.5 USDT</div>
+            </div>
+            <div class="tier-row" onclick="focusTierGateway('Tier 3: ASSET CORE', '1.0 USDT')">
+                <div class="tier-title">TIER 3: ASSET CORE</div>
+                <div class="tier-meta">Daily Extraction Vector: ⌆0.50 NXC / Day</div><div class="tier-price">1.0 USDT</div>
+            </div>
+            <div class="tier-row" onclick="focusTierGateway('Tier 4: CORPORATION', '5.0 USDT')">
+                <div class="tier-title">TIER 4: CORPORATION</div>
+                <div class="tier-meta">Daily Extraction Vector: ⌆1.00 NXC / Day</div><div class="tier-price">5.0 USDT</div>
+            </div>
+            <div class="tier-row" onclick="focusTierGateway('Tier 5: SYNDICATE', '10.0 USDT')">
+                <div class="tier-title">TIER 5: SYNDICATE</div>
+                <div class="tier-meta">Daily Extraction Vector: ⌆2.00 NXC / Day</div><div class="tier-price">10.0 USDT</div>
+            </div>
+            <div class="tier-row" onclick="focusTierGateway('Tier 6: ORACLE LORD', '100.0 USDT')">
+                <div class="tier-title" style="color: #bc6ff1;">TIER 6: ORACLE LORD</div>
+                <div class="tier-meta">Daily Extraction Vector: ⌆25.00 NXC / Day Base</div><div class="tier-price">100 USDT</div>
+            </div>
+            <div class="tier-row" onclick="focusTierGateway('Tier 7: APEX OVERLORD', '500.0 USDT')">
+                <div class="tier-title" style="color: #a855f7;">TIER 7: APEX OVERLORD</div>
+                <div class="tier-meta">Daily Extraction Vector: ⌆100.00 NXC / Day Base</div><div class="tier-price">500 USDT</div>
+            </div>
+        </div>
+
+        <!-- PERSISTENT INTEGRATED CHECKOUT TRUNK -->
+        <div class="checkout-box" id="dynamic-checkout-box">
+            <p style="font-weight: bold; color: #ef4444; margin: 0; text-transform: uppercase; font-size: 0.9rem;" id="selected-tier-label">GATEWAY PORTAL COLD</p>
+            <p style="margin: 6px 0; font-weight: bold; font-size: 0.85rem; color: #ef4444; line-height: 1.4;">Send only USDT-BEP20 to this address and paste your hash below to upgrade.</p>
+            
+            <!-- EXPLICIT INTERACTIVE TREASURY LOCK ADDRESS -->
+            <div class="monospace-address-block" id="master-wallet-address" onclick="copyWalletAddress()">0x8026d903129e98a46A811a5B3f49B935B6bc9C13</div>
+            
+            <button class="btn-action" style="margin-top: 5px; padding: 8px; font-size: 0.75rem;" onclick="copyWalletAddress()">📋 TAP ADDRESS TO COPY TREASURY KEY</button>
+            <p style="margin: 6px 0 0 0; font-size: 0.75rem; color: #94a3b8; text-align: center;">Network standard: <span class="matrix-gold">BNB Smart Chain (BEP20 Mainnet)</span></p>
+        </div>
+
+        <!-- HASH PACKET INJECTION CONTROL LINE -->
+        <h4 style="margin-top: 25px; font-size: 0.85rem; margin-bottom: 5px;">📡 TRANSMIT VERIFICATION HASH</h4>
+        <input type="text" class="input-field" id="tx-hash-input" placeholder="PASTE 66-CHARACTER BEP20 TXHASH">
+        <input type="text" class="input-field" id="rescue-target-input" placeholder="TARGET NICKNAME (REFERRAL RESCUE ONLY)">
+        <button class="btn-action" style="background-color: #10b981; color: #fff; margin-top: 15px;" onclick="submitBscTransaction()">⛓️ INJECT RECEIPT TOKEN</button>
+        
+        <!-- UN-BLOCKABLE TELEGRAM COMMUNICATIONS REDIRECT ANCHOR WIRE LINK -->
+        <a href="https://t.me/NXCcore" target="_blank" class="btn-action" style="background-color: #0088cc; color: #ffffff; margin-top: 20px;">💬 ENTER NXC TELEGRAM CHANNEL</a>
+    </div>
+
+    <script>
+        const SUPABASE_PROJECT_URL = "https://gtgspuewynrsopxrhfuj.supabase.co"; 
+        const SUPABASE_ANON_PUBLIC_KEY = "sb_publishable_N_r9-qdu0XMVzPw2TCHPiw_nSVJYDr-"; 
+        const supabase = window.supabase.createClient(SUPABASE_PROJECT_URL, SUPABASE_ANON_PUBLIC_KEY);
+
+        // Security Gate: Real-time metadata loading and hard extraction tracking row pull
+        async function runDashboardSecurityGateCheck() {
+            const { data: { session } } = await supabase.auth.getSession();
+            if (!session) {
+                window.location.href = "login.html"; // Shuts the viewport out if unauthorized
+            } else {

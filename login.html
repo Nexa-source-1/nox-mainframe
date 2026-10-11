@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+</head>
+
+<body>
+  
+</body>
+
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NXC ACCESS DOORWAY</title>
+    <style>
+        body { background-color: #03060f; color: #f1f5f9; font-family: 'Courier New', monospace; padding: 15px; text-align: center; margin: 0; }
+        .citadel-card { border: 1px solid #111a2e; background-color: #070b16; padding: 25px; max-width: 480px; margin: 20px auto; text-align: left; box-shadow: 0 10px 30px rgba(0,0,0,0.7); }
+        .btn-action { background-color: #10b981; color: #ffffff; padding: 14px; border: none; font-weight: bold; cursor: pointer; font-size: 0.95rem; width: 100%; margin-top: 15px; text-transform: uppercase; letter-spacing: 1px; text-align: center; display: block; text-decoration: none; box-sizing: border-box; }
+        .btn-action:hover { background-color: #059669; }
+        .input-field { width: 94%; padding: 10px; margin-top: 8px; border: 1px solid #111a2e; background-color: #03060f; color: #10b981; font-family: monospace; text-align: center; display: block; margin-left: auto; margin-right: auto; }
+    </style>
+    <!-- Official Supabase Client SDK Framework Node Connector -->
+    <script src="https://jsdelivr.net"></script>
+</head>
+<body>
+
+    <div class="citadel-card">
+        <h3 style="margin-top: 0; text-align: center; letter-spacing: 1px;">🪐 NXC PROTOCOL DOORWAY</h3>
+        
+        <div style="border: 1px dashed #d4af37; padding: 15px; background-color: #020617;">
+            <p style="margin: 0 0 12px 0; font-weight: bold; color: #d4af37; font-size: 0.85rem; text-transform: uppercase; text-align: center;">
+                🔒 ACCESS TERMINAL REQUIREMENT
+            </p>
+            
+            <input type="text" class="input-field" id="nxc-username-input" placeholder="ENTER OPERATOR NICKNAME" style="text-transform: lowercase;">
+            <input type="text" class="input-field" id="nxc-ghostkey-input" placeholder="PASTE 64-CHAR GHOST KEY">
+            
+            <button class="btn-action" onclick="executeNexaLogin()">🔑 CONNECT NODE ACCOUNT</button>
+        
+    </div>
+
+    <script>
+        // Exact matching credentials synced to ensure absolute project harmony
+        const SUPABASE_PROJECT_URL = "https://gtgspuewynrsopxrhfuj.supabase.co"; 
+        const SUPABASE_ANON_PUBLIC_KEY = "sb_publishable_N_r9-qdu0XMVzPw2TCHPiw_nSVJYDr-"; 
+        const supabase = window.supabase.createClient(SUPABASE_PROJECT_URL, SUPABASE_ANON_PUBLIC_KEY);
+
+        async function checkActiveSessionOnBoot() {
+            const { data: { session } } = await supabase.auth.getSession();
+            if (session && session.user) {
+                // Persistent LocalStorage Token verification check
+                window.location.href = "dashboard.html";
+            }
+        }
+        window.addEventListener('DOMContentLoaded', checkActiveSessionOnBoot);
+
+        async function executeNexaLogin() {
+            const username = document.getElementById('nxc-username-input').value.trim().toLowerCase();
+            const ghostKey = document.getElementById('nxc-ghostkey-input').value.trim();
+
+            if (username.length < 3 || ghostKey.length !== 64) {
+                alert("ACCESS DENIED: Credentials mismatch or invalid key layout parameters.");
+                return;
+            }
+
+            const anonymousEmail = `${username}@nexa.citadel`;
+            
+            const { data, error } = await supabase.auth.signInWithPassword({
+                email: anonymousEmail,
+                password: ghostKey
+            });
+
+            if (error) {
+                alert("SECURITY FAULT: Access Denied. Invalid nickname signature or key mismatch.");
+                return;
+            }
+
+            if (data.user) {
+                alert(`SESSION VERIFIED: Access Granted. Opening inner vault sanctuary...`);
+                window.location.href = "dashboard.html";
+            }
+        }
+    </script>
+</body>
+</html>

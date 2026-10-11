@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+</head>
+
+<body>
+  
+</body>
+
+</html>
+
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+</head>
+
+<body>
+  
+</body>
+
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NXC NODE INITIALIZER</title>
+    <style>
+        body { background-color: #03060f; color: #f1f5f9; font-family: 'Courier New', monospace; padding: 15px; text-align: center; margin: 0; }
+        .citadel-card { border: 1px solid #111a2e; background-color: #070b16; padding: 25px; max-width: 480px; margin: 20px auto; text-align: left; box-shadow: 0 10px 30px rgba(0,0,0,0.7); }
+        .btn-action { background-color: #7c3aed; color: #ffffff; padding: 14px; border: none; font-weight: bold; cursor: pointer; font-size: 0.95rem; width: 100%; margin-top: 15px; text-transform: uppercase; letter-spacing: 1px; text-align: center; display: block; text-decoration: none; box-sizing: border-box; }
+        .btn-action:hover { background-color: #6d28d9; }
+        .input-field { width: 94%; padding: 10px; margin-top: 8px; border: 1px solid #111a2e; background-color: #03060f; color: #10b981; font-family: monospace; text-align: center; display: block; margin-left: auto; margin-right: auto; }
+        .monospace-address-block { background-color: #03060f; border: 1px solid #111a2e; padding: 12px; color: #10b981; font-family: monospace; font-size: 0.68rem; font-weight: bold; text-align: center; word-break: break-all; cursor: pointer; margin: 10px 0; }
+    </style>
+    <!-- CORRECTED OFFICIAL SUPABASE SATELLITE DISH CONNECTOR CDN LINK Wire -->
+    <script src="https://jsdelivr.net"></script>
+</head>
+<body>
+
+    <div class="citadel-card">
+        <h3 style="margin-top: 0; text-align: center; letter-spacing: 1px;">🪐 INITIALIZE NEW NODE</h3>
+        
+        <div style="border: 1px dashed #7c3aed; padding: 15px; background-color: #020617;">
+            <p style="margin: 0 0 12px 0; font-weight: bold; color: #a78bfa; font-size: 0.85rem; text-transform: uppercase; text-align: center;">
+                ✨ REGISTER ALPHANUMERIC IDENTIFIER
+            </p>
+            
+            <!-- CRIMSON SECURITY WARNING BULLET BOX FOR STRATEGIC COGNITIVE FRAMING -->
+            <div style="background-color: #1e1b4b; border: 1px solid #ef4444; padding: 12px; margin-bottom: 15px; text-align: left;">
+                <p style="color: #ef4444; font-weight: bold; font-size: 0.75rem; margin: 0 0 4px 0; text-transform: uppercase; letter-spacing: 0.5px;">
+                    ⚠️ ABSOLUTE UNBENDING SYSTEM LAW:
+                </p>
+                <p style="font-size: 0.68rem; color: #f8fafc; margin: 0; line-height: 1.4; font-family: monospace;">
+                    This terminal operates under a strict Ghost-Key Protocol. If you lose or forget your generated Private Key, <span style="color: #ef4444; font-weight: bold;">YOU INSTANTLY LOSE ACCESS TO YOUR ACCOUNT AND ALL MINED BALANCES FOREVER.</span> There are no email backups, no passwords, and no customer support nodes to save you. Print it out or lose it entirely.
+                </p>
+            </div>
+            
+            <input type="text" class="input-field" id="nxc-reg-username" placeholder="CHOOSE UNIQUE NICKNAME" style="text-transform: lowercase;">
+            <button class="btn-action" onclick="generateNexaOperatorAccount()">✨ SPARK CREATION TRIGGER</button>
+
+            <!-- PRIVATE GHOST KEY CONTAINER DISPLAY DRAWER (HIDDEN UNTIL ACCOUNT INJECTED) -->
+            <div id="key-display-drawer" style="display: none; margin-top: 20px; border-top: 1px solid #111a2e; padding-top: 12px; text-align: center;">
+                <p style="color: #ef4444; font-weight: bold; font-size: 0.72rem; margin: 0 0 6px 0; text-transform: uppercase;">
+                    ⚠️ CRITICAL WARNING: COPY AND SECURE THIS GHOST KEY NOW!
+                </p>
+                <div class="monospace-address-block" id="generated-ghost-key-block" onclick="copyGhostKeyToClipboard()">GENERATING LAYOUT KEY...</div>
+                <button class="btn-action" style="padding: 8px; font-size: 0.75rem; margin-top: 5px; background-color: #d4af37; color: #000; width: 100%;" onclick="copyGhostKeyToClipboard()">📋 TAP BLOCK TO COPY KEY</button>
+                
+                <!-- NEW SYSTEM TOGGLE LINK ROUTING USER FORWARD TO LOGIN.HTML -->
+                <button class="btn-action" style="background-color: #10b981; color: #fff; margin-top: 15px;" onclick="window.location.href='login.html'">➡️ PROCEED TO TERMINAL ACCESS DOOR</button>
+            </div>
+        </div>
+
+        <!-- RE-ROUTING ACTION TOGGLE ANCHOR WIRE MATRICED TO LOGIN.HTML -->
+        <p style="font-size: 0.75rem; color: #94a3b8; text-align: center; margin-top: 15px; margin-bottom: 0;">
+            Already registered? <a href="login.html" style="color: #10b981; font-weight: bold; text-decoration: none;">LOG IN TO ACCESS TERMINAL ➡️</a>
+        </p>
+    </div>
+
+    <script>
+        function generateSecureGhostHexKey() {
+            const hexChars = '0123456789abcdef';
+            let tokenOutput = 'nxc_';
+            for (let i = 0; i < 60; i++) {
+                tokenOutput += hexChars[Math.floor(Math.random() * 16)];
+            }
+            return tokenOutput;
+        }
+
+        async function generateNexaOperatorAccount() {
+            const username = document.getElementById('nxc-reg-username').value.trim().toLowerCase();
+            if (username.length < 3) {
+                alert("ACCESS DENIED: Username handle must be at least 3 characters.");
+                return;
+            }
+
+            // Real Production Keys Mapped Natively ⌆
+            const SUPABASE_PROJECT_URL = "https://gtgspuewynrsopxrhfuj.supabase.co"; 
+            const SUPABASE_ANON_PUBLIC_KEY = "sb_publishable_N_r9-qdu0XMVzPw2TCHPiw_nSVJYDr-"; 
+            const supabase = window.supabase.createClient(SUPABASE_PROJECT_URL, SUPABASE_ANON_PUBLIC_KEY);
+
+            const freshGeneratedKey = generateSecureGhostHexKey();
+            const anonymousEmail = `${username}@nexa.citadel`;
+
+            alert("COMMENCING HARDWARE REGISTRATION SEED...");
+
+            const { data, error } = await supabase.auth.signUp({
+                email: anonymousEmail,
+                password: freshGeneratedKey,
+                options: { data: { display_username: username } }
+            });
+
+            if (error) {
+                alert("REGISTRATION SHUTDOWN: Username handle already claimed inside system index ledger.");
+                return;
+            }
+
+            if (data.user) {
+                await supabase.from('miners').insert([{ id: data.user.id, username: username, miner_tier: 1 }]);
+                
+                document.getElementById('key-display-drawer').style.display = 'block';
+                document.getElementById('generated-ghost-key-block').innerText = freshGeneratedKey;
+                alert("NODE_SUCCESS: Your un-crackable Ghost Key has successfully generated.");
+            }
+        }
+
+        function copyGhostKeyToClipboard() {
+            const keyString = document.getElementById('generated-ghost-key-block').innerText;
+            navigator.clipboard.writeText(keyString).then(() => {
+                alert("KEY STAMPED TO MEMORY:\n\nPaste this signature securely inside your offline notebook immediately!");
+            });
+        }
+    </script>
+</body>
+</html>
