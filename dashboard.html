@@ -125,11 +125,31 @@
     <script>
         const SUPABASE_PROJECT_URL = "https://gtgspuewynrsopxrhfuj.supabase.co"; 
         const SUPABASE_ANON_PUBLIC_KEY = "sb_publishable_N_r9-qdu0XMVzPw2TCHPiw_nSVJYDr-"; 
-        const supabase = window.supabase.createClient(SUPABASE_PROJECT_URL, SUPABASE_ANON_PUBLIC_KEY);
+        const supabase = supabase.createClient("https://gtgspuewynrsopxrhfuj.supabase.co","sb_publishable_N_r9-qdu0XMVzPw2TCHPiw_nSVJYDr-");
 
         // Security Gate: Real-time metadata loading and hard extraction tracking row pull
         async function runDashboardSecurityGateCheck() {
             const { data: { session } } = await supabase.auth.getSession();
             if (!session) {
-                window.location.href = "login.html"; // Shuts the viewport out if unauthorized
+                // CLEAN MOBILE REDIRECT WIRE - NO WINDOW PREFIX ARTIFACT
+                location.href = "login.html"; 
             } else {
+                const username = session.user.user_metadata.display_username || "OPERATOR_NODE";
+                document.getElementById('profile-username-display').innerText = username.toUpperCase();
+                
+                // Perfectly paired to look directly at your 'public.nox_accounts' database table rows
+                const { data: miner } = await supabase.from('nox_accounts').select('*').eq('user_id', session.user.id).single();
+                if (miner) {
+                    // Paints your 'balance_nox' integer and 'tier' metrics live onto the screen glass
+                    document.getElementById('user-nox-balance').innerText = `⌆${Number(miner.balance_nox).toFixed(6)}`;
+                    document.getElementById('current-tier-display').innerText = `TIER ${miner.tier} (Speed Active)`;
+                }
+                
+                // Dynamic pool float value synchronization readout
+                const { data: reserves } = await supabase.from('global_reserves').select('pool_a_float').eq('id', 1).single();
+                if (reserves) {
+                    document.getElementById('public-pool-counter').innerText = `⌆${Number(reserves.pool_a_float).toLocaleString('en-US', {minimumFractionDigits: 6})}`;
+                }
+            }
+        }
+        window.onload = runDashboardSecurityGateCheck;

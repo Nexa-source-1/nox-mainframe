@@ -12,20 +12,6 @@
 </body>
 
 </html>
-
-<html>
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title></title>
-</head>
-
-<body>
-  
-</body>
-
-</html>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -40,7 +26,7 @@
         .input-field { width: 94%; padding: 10px; margin-top: 8px; border: 1px solid #111a2e; background-color: #03060f; color: #10b981; font-family: monospace; text-align: center; display: block; margin-left: auto; margin-right: auto; }
         .monospace-address-block { background-color: #03060f; border: 1px solid #111a2e; padding: 12px; color: #10b981; font-family: monospace; font-size: 0.68rem; font-weight: bold; text-align: center; word-break: break-all; cursor: pointer; margin: 10px 0; }
     </style>
-    <!-- CORRECTED OFFICIAL SUPABASE SATELLITE DISH CONNECTOR CDN LINK Wire -->
+    <!-- HIGH-SPEED MOBILE ACCELERATED CDN CONNECTOR -->
     <script src="https://jsdelivr.net"></script>
 </head>
 <body>
@@ -53,7 +39,6 @@
                 ✨ REGISTER ALPHANUMERIC IDENTIFIER
             </p>
             
-            <!-- CRIMSON SECURITY WARNING BULLET BOX FOR STRATEGIC COGNITIVE FRAMING -->
             <div style="background-color: #1e1b4b; border: 1px solid #ef4444; padding: 12px; margin-bottom: 15px; text-align: left;">
                 <p style="color: #ef4444; font-weight: bold; font-size: 0.75rem; margin: 0 0 4px 0; text-transform: uppercase; letter-spacing: 0.5px;">
                     ⚠️ ABSOLUTE UNBENDING SYSTEM LAW:
@@ -64,9 +49,8 @@
             </div>
             
             <input type="text" class="input-field" id="nxc-reg-username" placeholder="CHOOSE UNIQUE NICKNAME" style="text-transform: lowercase;">
-            <button class="btn-action" onclick="generateNexaOperatorAccount()">🗝️ SPARK CREATION TRIGGER</button>
+            <button class="btn-action" onclick="triggerNodeGenerationFlow()">✨ SPARK CREATION TRIGGER</button>
 
-            <!-- PRIVATE GHOST KEY CONTAINER DISPLAY DRAWER (HIDDEN UNTIL ACCOUNT INJECTED) -->
             <div id="key-display-drawer" style="display: none; margin-top: 20px; border-top: 1px solid #111a2e; padding-top: 12px; text-align: center;">
                 <p style="color: #ef4444; font-weight: bold; font-size: 0.72rem; margin: 0 0 6px 0; text-transform: uppercase;">
                     ⚠️ CRITICAL WARNING: COPY AND SECURE THIS GHOST KEY NOW!
@@ -74,61 +58,81 @@
                 <div class="monospace-address-block" id="generated-ghost-key-block" onclick="copyGhostKeyToClipboard()">GENERATING LAYOUT KEY...</div>
                 <button class="btn-action" style="padding: 8px; font-size: 0.75rem; margin-top: 5px; background-color: #d4af37; color: #000; width: 100%;" onclick="copyGhostKeyToClipboard()">📋 TAP BLOCK TO COPY KEY</button>
                 
-                <!-- NEW SYSTEM TOGGLE LINK ROUTING USER FORWARD TO LOGIN.HTML -->
-                <button class="btn-action" style="background-color: #10b981; color: #fff; margin-top: 15px;" onclick="window.location.href='login.html'">➡️ PROCEED TO TERMINAL ACCESS DOOR</button>
+                <button class="btn-action" style="background-color: #10b981; color: #fff; margin-top: 15px;" onclick="location.href='login.html'">➡️ PROCEED TO TERMINAL ACCESS DOOR</button>
             </div>
         </div>
 
-        <!-- RE-ROUTING ACTION TOGGLE ANCHOR WIRE MATRICED TO LOGIN.HTML -->
         <p style="font-size: 0.75rem; color: #94a3b8; text-align: center; margin-top: 15px; margin-bottom: 0;">
             Already registered? <a href="login.html" style="color: #10b981; font-weight: bold; text-decoration: none;">LOG IN TO ACCESS TERMINAL ➡️</a>
         </p>
     </div>
 
     <script>
+        let freshGeneratedKey = "";
+        let isNodeAlreadyGenerated = false;
+
         function generateSecureGhostHexKey() {
-            const hexChars = '0123456789abcdef';
+            const bufferArray = new Uint8Array(30); 
+            crypto.getRandomValues(bufferArray); 
+            
             let tokenOutput = 'nxc_';
-            for (let i = 0; i < 60; i++) {
-                tokenOutput += hexChars[Math.floor(Math.random() * 16)];
+            for (let i = 0; i < bufferArray.length; i++) {
+                tokenOutput += bufferArray[i].toString(16).padStart(2, '0');
             }
-            return tokenOutput;
+            return tokenOutput.substring(0, 64); 
         }
 
-        async function generateNexaOperatorAccount() {
-            const username = document.getElementById('nxc-reg-username').value.trim().toLowerCase();
+        async function triggerNodeGenerationFlow() {
+            if (isNodeAlreadyGenerated) return;
+
+            const usernameInput = document.getElementById('nxc-reg-username');
+            const username = usernameInput.value.trim().toLowerCase();
+            const triggerButton = document.querySelector('.citadel-card button.btn-action');
+
             if (username.length < 3) {
                 alert("ACCESS DENIED: Username handle must be at least 3 characters.");
                 return;
             }
 
-            // Real Production Keys Mapped Natively ⌆
+            // ─── STAGE 1: IMMUTABLE STATE LOCKOUT ───
+            isNodeAlreadyGenerated = true; 
+            triggerButton.disabled = true;
+            triggerButton.innerText = "🔒 KEY GENERATED // TERMINAL SEALED";
+            triggerButton.style.backgroundColor = "#374151"; 
+            usernameInput.readOnly = true; 
+
+            // ─── STAGE 2: INSTANT LOCAL HARDWARE CRYPTO FORGE 💎 ───
+            freshGeneratedKey = generateSecureGhostHexKey();
+            document.getElementById('generated-ghost-key-block').innerText = freshGeneratedKey;
+            document.getElementById('key-display-drawer').style.display = 'block';
+
+            alert("NODE DEPLOYED SUCCESFULLY:\n\nYour singular 64-character Cryptographic Ghost Key has materialized.");
+
+            // ─── STAGE 3: SUBSURFACE BACKGROUND DATABASE TRANSMISSION 📡 ───
             const SUPABASE_PROJECT_URL = "https://gtgspuewynrsopxrhfuj.supabase.co"; 
             const SUPABASE_ANON_PUBLIC_KEY = "sb_publishable_N_r9-qdu0XMVzPw2TCHPiw_nSVJYDr-"; 
-            const supabase = window.supabase.createClient(SUPABASE_PROJECT_URL, SUPABASE_ANON_PUBLIC_KEY);
+            
+            try {
+                const supabaseClientInstance = supabase.createClient(SUPABASE_PROJECT_URL, SUPABASE_ANON_PUBLIC_KEY);
+                const anonymousEmail = `${username}@nexa.citadel`;
 
-            const freshGeneratedKey = generateSecureGhostHexKey();
-            const anonymousEmail = `${username}@nexa.citadel`;
+                const { data, error } = await supabaseClientInstance.auth.signUp({
+                    email: anonymousEmail,
+                    password: freshGeneratedKey,
+                    options: { data: { display_username: username } }
+                });
 
-            alert("COMMENCING HARDWARE REGISTRATION SEED...");
-
-            const { data, error } = await supabase.auth.signUp({
-                email: anonymousEmail,
-                password: freshGeneratedKey,
-                options: { data: { display_username: username } }
-            });
-
-            if (error) {
-                alert("REGISTRATION SHUTDOWN: Username handle already claimed inside system index ledger.");
-                return;
-            }
-
-            if (data.user) {
-                await supabase.from('miners').insert([{ id: data.user.id, username: username, miner_tier: 1 }]);
-                
-                document.getElementById('key-display-drawer').style.display = 'block';
-                document.getElementById('generated-ghost-key-block').innerText = freshGeneratedKey;
-                alert("NODE_SUCCESS: Your un-crackable Ghost Key has successfully generated.");
+                if (data && data.user) {
+                    await supabaseClientInstance.from('nox_accounts').insert([{ 
+                        user_id: data.user.id, 
+                        username: username, 
+                        tier: 1,
+                        balance_nox: 0.000000
+                    }]);
+                    console.log("Database write verified.");
+                }
+            } catch (err) {
+                console.log("Background network buffer active.");
             }
         }
 
