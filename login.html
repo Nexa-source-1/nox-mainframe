@@ -25,7 +25,7 @@
         .btn-action:hover { background-color: #059669; }
         .input-field { width: 94%; padding: 10px; margin-top: 8px; border: 1px solid #111a2e; background-color: #03060f; color: #10b981; font-family: monospace; text-align: center; display: block; margin-left: auto; margin-right: auto; }
     </style>
-    <!-- Official Supabase Client SDK Framework Node Connector -->
+    <!-- MATCHED HIGH-SPEED MOBILE ACCELERATED CDN CONNECTOR -->
     <script src="https://jsdelivr.net"></script>
 </head>
 <body>
@@ -41,49 +41,60 @@
             <input type="text" class="input-field" id="nxc-username-input" placeholder="ENTER OPERATOR NICKNAME" style="text-transform: lowercase;">
             <input type="text" class="input-field" id="nxc-ghostkey-input" placeholder="PASTE 64-CHAR GHOST KEY">
             
-            <button class="btn-action" onclick="executeNexaLogin()">♾️CONNECT NOX ACCOUNT</button>
-        
-    </div>
+            <button class="btn-action" id="login-trigger-btn" onclick="executeNexaLogin()">🔑 CONNECT NOX ACCOUNT</button>
+            
 
     <script>
-        // Exact matching credentials synced to ensure absolute project harmony
-        const SUPABASE_PROJECT_URL = "https://gtgspuewynrsopxrhfuj.supabase.co"; 
+        // Real production tokens mapped to preserve architecture symmetry
+        const SUPABASE_PROJECT_URL = "https://gtgspuewynrsopxrhfuj.supabase.co";  
         const SUPABASE_ANON_PUBLIC_KEY = "sb_publishable_N_r9-qdu0XMVzPw2TCHPiw_nSVJYDr-"; 
-        const supabase = window.supabase.createClient(SUPABASE_PROJECT_URL, SUPABASE_ANON_PUBLIC_KEY);
+        const supabaseInstance = supabase.createClient(SUPABASE_PROJECT_URL, SUPABASE_ANON_PUBLIC_KEY);
 
         async function checkActiveSessionOnBoot() {
-            const { data: { session } } = await supabase.auth.getSession();
+            const { data: { session } } = await supabaseInstance.auth.getSession();
             if (session && session.user) {
-                // Persistent LocalStorage Token verification check
-                window.location.href = "dashboard.html";
+                location.href = "dashboard.html";
             }
         }
-        window.addEventListener('DOMContentLoaded', checkActiveSessionOnBoot);
+        document.addEventListener('DOMContentLoaded', checkActiveSessionOnBoot);
 
         async function executeNexaLogin() {
             const username = document.getElementById('nxc-username-input').value.trim().toLowerCase();
             const ghostKey = document.getElementById('nxc-ghostkey-input').value.trim();
+            const loginBtn = document.getElementById('login-trigger-btn');
 
             if (username.length < 3 || ghostKey.length !== 64) {
                 alert("ACCESS DENIED: Credentials mismatch or invalid key layout parameters.");
                 return;
             }
 
+            // UI Lockdown to prevent execution double-taps during network transit
+            loginBtn.disabled = true;
+            loginBtn.innerText = "🔒 VERIFYING NODE KEYS...";
+
             const anonymousEmail = `${username}@nexa.citadel`;
             
-            const { data, error } = await supabase.auth.signInWithPassword({
-                email: anonymousEmail,
-                password: ghostKey
-            });
+            try {
+                const { data, error } = await supabaseInstance.auth.signInWithPassword({
+                    email: anonymousEmail,
+                    password: ghostKey
+                });
 
-            if (error) {
-                alert("SECURITY FAULT: Access Denied. Invalid nickname signature or key mismatch.");
-                return;
-            }
+                if (error) {
+                    alert("SECURITY FAULT: Access Denied. Invalid nickname signature or key mismatch.");
+                    loginBtn.disabled = false;
+                    loginBtn.innerText = "🔑 CONNECT NOX ACCOUNT";
+                    return;
+                }
 
-            if (data.user) {
-                alert(`SESSION VERIFIED: Access Granted. Opening inner vault sanctuary...`);
-                window.location.href = "dashboard.html";
+                if (data.user) {
+                    alert(`SESSION VERIFIED: Access Granted. Opening inner vault sanctuary...`);
+                    location.href = "dashboard.html"; // Clean mobile redirect wire
+                }
+            } catch (err) {
+                alert("NETWORK BREAK: Connection buffer reset. Try logging in again.");
+                loginBtn.disabled = false;
+                loginBtn.innerText = "🔑 CONNECT NOX ACCOUNT";
             }
         }
     </script>
