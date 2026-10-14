@@ -116,7 +116,7 @@
         <h4 style="margin-top: 25px; font-size: 0.85rem; margin-bottom: 5px;">📡 TRANSMIT VERIFICATION HASH</h4>
         <input type="text" class="input-field" id="tx-hash-input" placeholder="PASTE 66-CHARACTER BEP20 TXHASH">
         <input type="text" class="input-field" id="rescue-target-input" placeholder="TARGET NICKNAME (REFERRAL RESCUE ONLY)">
-        <button class="btn-action" style="background-color: #10b981; color: #fff; margin-top: 15px;" onclick="submitBscTransaction()">⛓️ INJECT RECEIPT TOKEN</button>
+        <button class="btn-action" style="background-color: #10b981; color: #fff; margin-top: 15px;" onclick="submitBscTransaction()">⛓️ INJECT RECEIPT HASH</button>
         
         <!-- UN-BLOCKABLE TELEGRAM COMMUNICATIONS REDIRECT ANCHOR WIRE LINK -->
         <a href="https://t.me/NXCcore" target="_blank" class="btn-action" style="background-color: #0088cc; color: #ffffff; margin-top: 20px;">💬 ENTER NXC TELEGRAM CHANNEL</a>
@@ -153,3 +153,9 @@
             }
         }
         window.onload = runDashboardSecurityGateCheck;
+        
+<script type="module">
+  import { supabase } from './supabase.js'
+
+  // This page's Supabase Auth code uses `supabase`
+</script>

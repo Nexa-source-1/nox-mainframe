@@ -1,102 +1,320 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title></title>
+  <title>Log In</title>
+
+  <style>
+    :root {
+      color-scheme: dark;
+      font-family: system-ui, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      background: #0b1020;
+      color: #f4f6ff;
+    }
+
+    main {
+      width: min(100%, 420px);
+      padding: 32px;
+      border: 1px solid #29314c;
+      border-radius: 16px;
+      background: #121a2e;
+      box-shadow: 0 18px 60px #0006;
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-size: 1.8rem;
+    }
+
+    .intro {
+      margin: 0 0 24px;
+      color: #aeb8d0;
+      line-height: 1.5;
+    }
+
+    label {
+      display: block;
+      margin: 18px 0 8px;
+      font-weight: 600;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid #394564;
+      border-radius: 9px;
+      background: #0b1020;
+      color: #f4f6ff;
+      font: inherit;
+    }
+
+    input:focus {
+      outline: 2px solid #8b9eff;
+      outline-offset: 2px;
+    }
+
+    #ghostKeyInput {
+      font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+      letter-spacing: 0.04em;
+    }
+
+    #usernameAvailability {
+      min-height: 1.4em;
+      margin: 8px 0 0;
+      color: #aeb8d0;
+      line-height: 1.4;
+      overflow-wrap: anywhere;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 22px;
+      padding: 12px 16px;
+      border: 0;
+      border-radius: 9px;
+      background: #7188ff;
+      color: #0b1020;
+      font: inherit;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    button:disabled {
+      cursor: wait;
+      opacity: 0.65;
+    }
+
+    #loginMessage {
+      min-height: 1.5em;
+      margin: 14px 0 0;
+      color: #ffaaaa;
+      line-height: 1.4;
+      overflow-wrap: anywhere;
+    }
+  </style>
 </head>
 
 <body>
-  
-</body>
+  <main>
+    <h1>Log in</h1>
+    <p class="intro">Enter your username and saved 64-character key.</p>
 
-</html>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NXC ACCESS DOORWAY</title>
-    <style>
-        body { background-color: #03060f; color: #f1f5f9; font-family: 'Courier New', monospace; padding: 15px; text-align: center; margin: 0; }
-        .citadel-card { border: 1px solid #111a2e; background-color: #070b16; padding: 25px; max-width: 480px; margin: 20px auto; text-align: left; box-shadow: 0 10px 30px rgba(0,0,0,0.7); }
-        .btn-action { background-color: #10b981; color: #ffffff; padding: 14px; border: none; font-weight: bold; cursor: pointer; font-size: 0.95rem; width: 100%; margin-top: 15px; text-transform: uppercase; letter-spacing: 1px; text-align: center; display: block; text-decoration: none; box-sizing: border-box; }
-        .btn-action:hover { background-color: #059669; }
-        .input-field { width: 94%; padding: 10px; margin-top: 8px; border: 1px solid #111a2e; background-color: #03060f; color: #10b981; font-family: monospace; text-align: center; display: block; margin-left: auto; margin-right: auto; }
-    </style>
-    <!-- MATCHED HIGH-SPEED MOBILE ACCELERATED CDN CONNECTOR -->
-    <script src="https://jsdelivr.net"></script>
-</head>
-<body>
+    <form id="login-form" novalidate>
+      <label for="usernameInput">Username</label>
+      <input
+        id="usernameInput"
+        name="username"
+        type="text"
+        minlength="3"
+        maxlength="24"
+        autocomplete="username"
+        autocapitalize="off"
+        required
+      >
+      <p id="usernameAvailability" role="status" aria-live="polite"></p>
 
-    <div class="citadel-card">
-        <h3 style="margin-top: 0; text-align: center; letter-spacing: 1px;">🪐 NXC PROTOCOL DOORWAY</h3>
-        
-        <div style="border: 1px dashed #d4af37; padding: 15px; background-color: #020617;">
-            <p style="margin: 0 0 12px 0; font-weight: bold; color: #d4af37; font-size: 0.85rem; text-transform: uppercase; text-align: center;">
-                🔒 ACCESS TERMINAL REQUIREMENT
-            </p>
-            
-            <input type="text" class="input-field" id="nxc-username-input" placeholder="ENTER OPERATOR NICKNAME" style="text-transform: lowercase;">
-            <input type="text" class="input-field" id="nxc-ghostkey-input" placeholder="PASTE 64-CHAR GHOST KEY">
-            
-            <button class="btn-action" id="login-trigger-btn" onclick="executeNexaLogin()">🔑 CONNECT NOX ACCOUNT</button>
-            
+      <label for="ghostKeyInput">Saved key</label>
+      <input
+        id="ghostKeyInput"
+        name="ghostKey"
+        type="password"
+        autocomplete="current-password"
+        autocapitalize="off"
+        spellcheck="false"
+        required
+      >
 
-    <script>
-        // Real production tokens mapped to preserve architecture symmetry
-        const SUPABASE_PROJECT_URL = "https://gtgspuewynrsopxrhfuj.supabase.co";  
-        const SUPABASE_ANON_PUBLIC_KEY = "sb_publishable_N_r9-qdu0XMVzPw2TCHPiw_nSVJYDr-"; 
-        const supabaseInstance = supabase.createClient(SUPABASE_PROJECT_URL, SUPABASE_ANON_PUBLIC_KEY);
+      <button id="btn-login" type="submit">Log in</button>
+      <p id="loginMessage" role="alert" aria-live="polite"></p>
+    </form>
+  </main>
 
-        async function checkActiveSessionOnBoot() {
-            const { data: { session } } = await supabaseInstance.auth.getSession();
-            if (session && session.user) {
-                location.href = "dashboard.html";
-            }
+  <script type="module">
+    // Assumes supabase.js contains: export const supabase = createClient(...)
+    import { supabase } from './supabase.js';
+
+    const loginForm = document.getElementById('login-form');
+    const usernameInput = document.getElementById('usernameInput');
+    const ghostKeyInput = document.getElementById('ghostKeyInput');
+    const loginButton = document.getElementById('btn-login');
+    const loginMessage = document.getElementById('loginMessage');
+    const usernameAvailability =
+      document.getElementById('usernameAvailability');
+
+    const USERNAME_EMAIL_DOMAIN = 'nexa.citadel';
+    const USERNAME_PATTERN = /^[a-z0-9_]{3,24}$/;
+
+    let availabilityTimer;
+    let availabilityRequestId = 0;
+
+    function isInvalidLogin(error) {
+      return error?.code === 'invalid_credentials' ||
+        error?.message === 'Invalid login credentials';
+    }
+
+    function redirectToDashboard() {
+      // Supabase Auth persists the session. Do not cache the key yourself.
+      window.location.assign('/Dashboard.html');
+    }
+
+    function scheduleUsernameAvailabilityCheck() {
+      clearTimeout(availabilityTimer);
+
+      // Ignore results from older requests if the user has typed again.
+      const requestId = ++availabilityRequestId;
+      const username = usernameInput.value.trim().toLowerCase();
+
+      usernameAvailability.style.color = '#aeb8d0';
+
+      if (!username) {
+        usernameAvailability.textContent = '';
+        return;
+      }
+
+      if (username.length < 3) {
+        usernameAvailability.textContent =
+          'Enter at least 3 characters to check availability.';
+        return;
+      }
+
+      if (!USERNAME_PATTERN.test(username)) {
+        usernameAvailability.textContent =
+          'Use 3–24 lowercase letters, numbers, or underscores.';
+        return;
+      }
+
+      usernameAvailability.textContent = '🌍Checking availability…';
+
+      availabilityTimer = setTimeout(async () => {
+        try {
+          const { data, error } = await supabase.rpc(
+            'nox_login_username_available',
+            { p_username: username }
+          );
+
+          if (requestId !== availabilityRequestId) return;
+          if (error) throw error;
+          if (typeof data !== 'boolean') {
+            throw new Error('Availability check returned an unexpected response.');
+          }
+
+          if (data) {
+            usernameAvailability.style.color = '#9ee6ae';
+            usernameAvailability.textContent =
+              'Username is available for a new account.';
+          } else {
+            usernameAvailability.style.color = '#ffd27f';
+            usernameAvailability.textContent =
+              'Username is already registered. Enter your saved key to log in.';
+          }
+        } catch (error) {
+          if (requestId !== availabilityRequestId) return;
+
+          console.error('Username availability check failed:', error);
+          usernameAvailability.style.color = '#ffaaaa';
+          usernameAvailability.textContent =
+            'Could not check availability right now. You can still try to log in.';
         }
-        document.addEventListener('DOMContentLoaded', checkActiveSessionOnBoot);
+      }, 350);
+    }
 
-        async function executeNexaLogin() {
-            const username = document.getElementById('nxc-username-input').value.trim().toLowerCase();
-            const ghostKey = document.getElementById('nxc-ghostkey-input').value.trim();
-            const loginBtn = document.getElementById('login-trigger-btn');
+    usernameInput.addEventListener(
+      'input',
+      scheduleUsernameAvailabilityCheck
+    );
 
-            if (username.length < 3 || ghostKey.length !== 64) {
-                alert("ACCESS DENIED: Credentials mismatch or invalid key layout parameters.");
-                return;
-            }
+    loginForm.addEventListener('submit', async (event) => {
+      event.preventDefault();
 
-            // UI Lockdown to prevent execution double-taps during network transit
-            loginBtn.disabled = true;
-            loginBtn.innerText = "🔒 VERIFYING NODE KEYS...";
+      loginMessage.textContent = '';
+      loginMessage.style.color = '#ffaaaa';
 
-            const anonymousEmail = `${username}@nexa.citadel`;
-            
-            try {
-                const { data, error } = await supabaseInstance.auth.signInWithPassword({
-                    email: anonymousEmail,
-                    password: ghostKey
-                });
+      const username = usernameInput.value.trim().toLowerCase();
+      const ghostKey = ghostKeyInput.value.trim();
+      const anonymousEmail = `${username}@${USERNAME_EMAIL_DOMAIN}`;
 
-                if (error) {
-                    alert("SECURITY FAULT: Access Denied. Invalid nickname signature or key mismatch.");
-                    loginBtn.disabled = false;
-                    loginBtn.innerText = "🔑 CONNECT NOX ACCOUNT";
-                    return;
-                }
+      if (!USERNAME_PATTERN.test(username)) {
+        loginMessage.textContent =
+          'Username must be 3–24 characters: lowercase letters, numbers, or underscores.';
+        return;
+      }
 
-                if (data.user) {
-                    alert(`SESSION VERIFIED: Access Granted. Opening inner vault sanctuary...`);
-                    location.href = "dashboard.html"; // Clean mobile redirect wire
-                }
-            } catch (err) {
-                alert("NETWORK BREAK: Connection buffer reset. Try logging in again.");
-                loginBtn.disabled = false;
-                loginBtn.innerText = "🔑 CONNECT NOX ACCOUNT";
-            }
+      if (ghostKey.length !== 64) {
+        loginMessage.textContent =
+          `The key must be exactly 64 characters; this input has ${ghostKey.length}.`;
+        return;
+      }
+
+      loginButton.disabled = true;
+      loginButton.textContent = 'Working…';
+      loginMessage.textContent = 'Signing in…';
+
+      try {
+        const { data: loginData, error: loginError } =
+          await supabase.auth.signInWithPassword({
+            email: anonymousEmail,
+            password: ghostKey
+          });
+
+        if (!loginError && loginData.session) {
+          redirectToDashboard();
+          return;
         }
-    </script>
+
+        // Supabase Auth returns errors in { error }; they are not normally thrown.
+        if (!isInvalidLogin(loginError)) {
+          throw loginError || new Error('Sign-in returned no session.');
+        }
+
+        // JIT signup fallback. The database trigger creates the account row.
+        const { data: signUpData, error: signUpError } =
+          await supabase.auth.signUp({
+            email: anonymousEmail,
+            password: ghostKey,
+            options: {
+              data: {
+                display_username: username
+              }
+            }
+          });
+
+        if (signUpError) {
+          throw signUpError;
+        }
+
+        if (!signUpData.user) {
+          throw new Error('Signup returned no user.');
+        }
+
+        if (!signUpData.session) {
+          loginMessage.textContent =
+            'Signup was accepted, but no session was issued. Check your email-confirmation settings.';
+          return;
+        }
+
+        redirectToDashboard();
+      } catch (error) {
+        console.error('Login or signup failed:', error);
+        loginMessage.textContent =
+          error?.message || 'Login or account provisioning failed.';
+      } finally {
+        loginButton.disabled = false;
+        loginButton.textContent = 'Log in';
+      }
+    });
+  </script>
 </body>
 </html>
